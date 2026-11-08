@@ -1,3 +1,7 @@
 <Solution>
+  <Folder Name="/Samples/">
+    <Project Path="Samples/Library.Sample/Library.Sample.vbproj" />
+  </Folder>
+  <Project Path="Library.Tests/Library.Tests.vbproj" />
   <Project Path="Library/Library.vbproj" />
 </Solution>
