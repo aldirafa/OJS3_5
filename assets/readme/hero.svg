@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" role="img" aria-labelledby="title desc">
+  <title id="title">OJS 3.5 for .NET</title>
+  <desc id="desc">A .NET client for the Open Journal Systems 3.5 REST API. On the right, raw PHP-style JSON sent by OJS (string numbers, a MySQL date, an empty array for an empty object) is turned into typed .NET values: WorkflowStage.Production, SubmissionStatus.Published, a DateTime and an empty dictionary.</desc>
+
+  <!-- paper -->
+  <rect width="1200" height="470" rx="24" fill="#FBF8F2"/>
+  <rect x="0.5" y="0.5" width="1199" height="469" rx="23.5" fill="none" stroke="#E4DDD0"/>
+
+  <!-- ============ title block: journal masthead ============ -->
+  <g id="title-block" transform="translate(64 0)">
+    <text x="0" y="96" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" letter-spacing="2.5" fill="#1F4E79">OPEN JOURNAL SYSTEMS · REST API</text>
+    <!-- masthead double rule -->
+    <rect x="0" y="114" width="540" height="3" fill="#1C2430"/>
+    <rect x="0" y="122" width="540" height="1" fill="#1C2430"/>
+
+    <text x="-3" y="200" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700" fill="#1C2430">OJS 3.5 <tspan fill="#1F4E79">for .NET</tspan></text>
+
+    <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="25" fill="#2E3742">
+      <tspan x="0" y="256">Typed, async .NET calls for every public</tspan>
+      <tspan x="0" y="290">endpoint of the OJS 3.5 REST API.</tspan>
+    </text>
+    <text x="0" y="334" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-style="italic" fill="#6B7280">Tested against live OJS 3.5 journals.</text>
+
+    <!-- metadata line, like a journal issue line -->
+    <rect x="0" y="370" width="540" height="1" fill="#D9D3C7"/>
+    <text x="0" y="404" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" fill="#6B7280">
+      <tspan fill="#C2410C" font-weight="700">Ojs.Api.Client</tspan><tspan> · VB.NET · C# · F# · .NET 10 · MIT</tspan>
+    </text>
+  </g>
+
+  <!-- ============ proof: what OJS sends -> what you get ============ -->
+  <g id="proof" transform="translate(676 44)">
+    <!-- what OJS sends -->
+    <text x="0" y="22" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16" letter-spacing="2" fill="#6B7280">OJS SENDS</text>
+    <rect x="0" y="34" width="460" height="148" rx="12" fill="#FFFFFF" stroke="#D9D3C7"/>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="19">
+      <text x="22" y="70"><tspan fill="#1F4E79">"stageId"</tspan><tspan fill="#1C2430">: </tspan><tspan fill="#C2410C">"5"</tspan><tspan fill="#1C2430">,</tspan></text>
+      <text x="22" y="100"><tspan fill="#1F4E79">"status"</tspan><tspan fill="#1C2430">: </tspan><tspan fill="#C2410C">"3"</tspan><tspan fill="#1C2430">,</tspan></text>
+      <text x="22" y="130"><tspan fill="#1F4E79">"dateSubmitted"</tspan><tspan fill="#1C2430">: </tspan><tspan fill="#C2410C">"2026-06-01 10:00:00"</tspan><tspan fill="#1C2430">,</tspan></text>
+      <text x="22" y="160"><tspan fill="#1F4E79">"metadataLocales"</tspan><tspan fill="#1C2430">: </tspan><tspan fill="#C2410C">[]</tspan></text>
+    </g>
+
+    <!-- arrow -->
+    <path d="M230 192 L230 220" stroke="#1C2430" stroke-width="2"/>
+    <path d="M222 213 L230 223 L238 213" fill="none" stroke="#1C2430" stroke-width="2" stroke-linejoin="round"/>
+
+    <!-- what you get: properties, arrows and values each in their own column -->
+    <text x="0" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16" letter-spacing="2" fill="#6B7280">YOU GET</text>
+    <rect x="0" y="262" width="460" height="148" rx="12" fill="#1C2430"/>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="19">
+      <g fill="#E8E4DA">
+        <text x="22" y="298">s.StageId</text>
+        <text x="22" y="328">s.Status</text>
+        <text x="22" y="358">s.DateSubmitted</text>
+        <text x="22" y="388">s.MetadataLocales</text>
+      </g>
+      <g fill="#8A93A0">
+        <text x="236" y="298">→</text>
+        <text x="236" y="328">→</text>
+        <text x="236" y="358">→</text>
+        <text x="236" y="388">→</text>
+      </g>
+      <text x="266" y="298" fill="#9CC3E6">Production</text>
+      <text x="266" y="328" fill="#9CC3E6">Published</text>
+      <text x="266" y="358" fill="#F0B66B">DateTime</text>
+      <text x="266" y="388" fill="#F0B66B">{ } (empty)</text>
+    </g>
+  </g>
+</svg>

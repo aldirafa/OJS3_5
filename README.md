@@ -1,21 +1,14 @@
-# OJS 3.5 .NET Client
+![OJS 3.5 for .NET: typed, async .NET calls for every public endpoint of the OJS 3.5 REST API. PHP-style JSON from OJS such as "stageId": "5" and "2026-06-01 10:00:00" becomes WorkflowStage.Production and a DateTime.](https://raw.githubusercontent.com/aldirafa/OJS3_5/master/assets/readme/hero.svg)
 
-A .NET client for the **[Open Journal Systems](https://pkp.sfu.ca/software/ojs/) 3.5 REST API**. It is written in
-VB.NET and works from any .NET language: VB.NET, C#, F#, PowerShell and others.
+[![NuGet](https://img.shields.io/nuget/vpre/Ojs.Api.Client?label=NuGet&color=1F4E79)](https://www.nuget.org/packages/Ojs.Api.Client) [![CI](https://github.com/aldirafa/OJS3_5/actions/workflows/ci.yml/badge.svg)](https://github.com/aldirafa/OJS3_5/actions/workflows/ci.yml) [![OJS 3.5](https://img.shields.io/badge/OJS-3.5-1C2430)](https://pkp.sfu.ca/software/ojs/) [![.NET 10](https://img.shields.io/badge/.NET-10-1F4E79)](https://dotnet.microsoft.com/) [![License: MIT](https://img.shields.io/badge/license-MIT-C2410C)](https://github.com/aldirafa/OJS3_5/blob/HEAD/LICENSE.txt)
 
-* **Complete.** It covers every public endpoint of OJS 3.5:
-  * submissions, publications, contributors, files, decisions and reviews;
-  * issues, sections, users and invitations;
-  * journals, site settings, themes, announcements and institutions;
-  * email templates, DOIs, ORCID, statistics, vocabularies and RORs.
-* **Typed.** Models with enums for OJS constants, and multilingual values (`LocalizedString`, `LocalizedVocab`).
-  Edit models send only the fields you set.
-* **Tested against real servers.** The PHP backend's quirks are handled for you: string numbers, `"Y-m-d H:i:s"`
-  dates, `[]` for empty objects, responses that differ from the OpenAPI document, and more. See
-  [OJS 3.5 Quirks](https://github.com/aldirafa/OJS3_5/wiki/OJS-3.5-Quirks).
-* **Convenient.** Automatic paging, `IAsyncEnumerable` streaming, typed exceptions with validation messages, file
-  uploads and downloads, and CSV statistics.
-* **No dependencies.** It needs only `System.Net.Http` and `System.Text.Json` from .NET 10.
+Manage an [Open Journal Systems](https://pkp.sfu.ca/software/ojs/) journal from .NET. The library covers:
+
+* submissions, reviews, issues and users;
+* DOIs, statistics and the rest of the OJS 3.5 REST API.
+
+You get typed models and async calls, without wrestling with PHP's JSON. It is written in VB.NET and works the same
+from C#, F# and PowerShell.
 
 ## Install
 
@@ -23,19 +16,15 @@ VB.NET and works from any .NET language: VB.NET, C#, F#, PowerShell and others.
 dotnet add package Ojs.Api.Client --prerelease
 ```
 
-The package contains `OJS3_5.Library.dll`; all types are in the `OJS3_5.Library` namespace (`OJS3_5.Library.OjsClient`, `OJS3_5.Library.Models`, ...).
+You need an API token from **User Profile > API Key** in OJS. The server must have `api_key_secret` set in the
+`[security]` section of its `config.inc.php`.
 
 ## Quick start
-
-You need an API token: in OJS, open **User Profile > API Key**. The server must have `api_key_secret` set in
-`config.inc.php`.
 
 **VB.NET**
 
 ```vb
 Imports OJS3_5.Library
-Imports OJS3_5.Library.Models
-Imports OJS3_5.Library.Queries
 
 Using ojs As New OjsClient(New OjsClientOptions With {
     .BaseUrl = "https://journals.example.com",
@@ -84,15 +73,33 @@ task {
 }
 ```
 
-If the installation's URLs contain `index.php` (e.g. `https://example.com/index.php/jpk`), set `UseIndexPhp = True`.
+Two settings depend on the installation:
+
+* **`index.php` in URLs.** If the journal's URLs contain it (`https://example.com/index.php/jpk`), set `UseIndexPhp = True`.
+* **Types.** All types live in the `OJS3_5.Library` namespace and its sub-namespaces, such as `Models` and `Queries`.
+
+## How it works
+
+![How a call travels: your code calls a typed method, OjsClient builds the request with the API token and only the fields you set, OJS 3.5 answers with PHP-style JSON, and the normalizer turns it into typed results or a typed exception.](https://raw.githubusercontent.com/aldirafa/OJS3_5/master/assets/readme/how-it-works.svg)
+
+The OJS backend is PHP, and its JSON shows it:
+
+* numbers and booleans arrive as strings, dates as `"Y-m-d H:i:s"`;
+* `[]` stands in for an empty object;
+* several responses differ from the OpenAPI document.
+
+The library reads every value against the model it is bound to, so you work with `Integer?`, `DateTime?`,
+`WorkflowStage` and `LocalizedString` instead. Each deviation we found on live journals is handled and listed on
+[OJS 3.5 Quirks](https://github.com/aldirafa/OJS3_5/wiki/OJS-3.5-Quirks).
 
 ## Examples
 
-### Pagination
+### Paging through results
 
 ```vb
 ' One page
-Dim page = Await ojs.Submissions.ListAsync(New SubmissionQuery With {.Status = {SubmissionStatus.Published}, .Count = 50})
+Dim page = Await ojs.Submissions.ListAsync(
+    New SubmissionQuery With {.Status = {SubmissionStatus.Published}, .Count = 50})
 Console.WriteLine($"{page.Items.Count} of {page.ItemsMax}")
 
 ' Every page
@@ -100,7 +107,7 @@ Dim all = Await ojs.Submissions.ListAllAsync(New SubmissionQuery With {.StageIds
 ```
 
 ```csharp
-// Stream page by page
+// Stream page by page; later pages are fetched only when needed
 await foreach (var issue in ojs.Issues.Enumerate(new IssueQuery { IsPublished = true }))
     Console.WriteLine(issue.Identification);
 ```
@@ -151,6 +158,19 @@ catch (OjsApiException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotF
 }
 ```
 
+### DOIs and statistics
+
+```vb
+Await ojs.Dois.Submissions.AssignAsync({12, 13})
+Using xml = Await ojs.Dois.Submissions.ExportAndDownloadAsync({12, 13})
+    Await xml.SaveAsAsync(xml.FileName)
+End Using
+
+Dim top = Await ojs.Stats.Publications.ListAsync(
+    New PublicationStatsQuery With {.DateStart = New DateOnly(2026, 1, 1), .Count = 10})
+Dim csv = Await ojs.Stats.Publications.ListCountriesCsvAsync()
+```
+
 ### Several journals
 
 ```vb
@@ -160,19 +180,7 @@ For Each journal In Await ojs.Contexts.ListAllAsync()
 Next
 ```
 
-### DOIs and statistics
-
-```vb
-Await ojs.Dois.Submissions.AssignAsync({12, 13})
-Using xml = Await ojs.Dois.Submissions.ExportAndDownloadAsync({12, 13})
-    Await xml.SaveAsAsync(xml.FileName)
-End Using
-
-Dim top = Await ojs.Stats.Publications.ListAsync(New PublicationStatsQuery With {.DateStart = New DateOnly(2026, 1, 1), .Count = 10})
-Dim csv = Await ojs.Stats.Publications.ListCountriesCsvAsync()
-```
-
-## API overview
+## What's covered
 
 | `OjsClient` property | Endpoints |
 |---|---|
@@ -183,25 +191,16 @@ Dim csv = Await ojs.Stats.Publications.ListCountriesCsvAsync()
 | `Announcements`, `Institutions` | news, and institutions for statistics |
 | `EmailTemplates`, `Mailables`, `Emails` | emails |
 | `Dois`, `Reviews`, `Orcid` | DOIs, review exports and ORCID |
-| `Stats` | editorial, user and usage statistics |
+| `Stats` | editorial, user and usage statistics, as JSON or CSV |
 | `Vocabs`, `Rors` | keyword suggestions and the Research Organization Registry |
 | `TemporaryFiles` | uploads referenced by other requests |
-| `SendAsync` | raw access to any endpoint |
+| `SendAsync` | raw access to any endpoint, including plugin APIs |
 
 ## Documentation
 
 * **[Wiki](https://github.com/aldirafa/OJS3_5/wiki/Home):** one page per area, with examples in VB.NET, C# and F#.
-* **XML documentation:** every public member has a summary and an example, shown in IntelliSense.
-* **Sample app:** [`Samples/Library.Sample`](https://github.com/aldirafa/OJS3_5/blob/HEAD/Samples/Library.Sample/Program.vb) is a small command-line tool:
-
-  ```
-  set OJS_BASE_URL=https://journals.example.com
-  set OJS_JOURNAL=jpk
-  set OJS_TOKEN=...
-  dotnet run --project Samples/Library.Sample -- issues
-  dotnet run --project Samples/Library.Sample -- submission 12
-  dotnet run --project Samples/Library.Sample -- stats
-  ```
+* **IntelliSense:** every public member has a summary and an example.
+* **[Sample app](https://github.com/aldirafa/OJS3_5/blob/HEAD/Samples/Library.Sample/Program.vb):** a small command-line tool with `issues`, `submission <id>`, `stats`, `export-dois` and more.
 
 ## Building and testing
 
@@ -210,16 +209,16 @@ dotnet build OJS3_5.slnx
 dotnet test OJS3_5.slnx
 ```
 
-The unit tests need no server. The live tests run against a real journal when you set the `OJS_*` environment
-variables, and the tests that change data also need `OJS_ALLOW_WRITES=1`. Run those against a test journal only. See
-[Testing and Contributing](https://github.com/aldirafa/OJS3_5/wiki/Testing-and-Contributing).
-
-`tools/doc-check` compiles every code example in the XML documentation and the wiki, in VB.NET, C# and F#.
+* **Unit tests** need no server.
+* **Live tests** run against a real journal when you set the `OJS_*` environment variables.
+* **Tests that change data** also need `OJS_ALLOW_WRITES=1`. Run those against a test journal only. See
+  [Testing and Contributing](https://github.com/aldirafa/OJS3_5/wiki/Testing-and-Contributing).
+* **Documentation examples:** `pwsh tools/doc-check/check.ps1` compiles every one of them, in VB.NET, C# and F#.
 
 ## Compatibility
 
-* **OJS:** 3.5.x. Tested against OJS 3.5.0.
-* **.NET:** .NET 10 or later.
+* **OJS** 3.5.x, tested against OJS 3.5.0.
+* **.NET** 10 or later.
 
 ## License
 
