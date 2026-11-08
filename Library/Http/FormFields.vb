@@ -1,7 +1,7 @@
 Imports System.Net.Http
 Imports System.Text.Json
 Imports System.Text.Json.Nodes
-Imports Library.Serialization
+Imports OJS3_5.Library.Serialization
 
 Namespace Http
 

@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build
+        run: dotnet build OJS3_5.slnx -c Release -warnaserror
+
+      # Live tests need a real OJS server and tokens; they are skipped here.
+      - name: Unit tests
+        run: dotnet test OJS3_5.slnx -c Release --no-build --filter "TestCategory!=Live&TestCategory!=LiveWrite"
+
+      - name: Documentation examples compile
+        shell: pwsh
+        run: ./tools/doc-check/check.ps1
+
+      - name: Pack (dry run)
+        run: dotnet pack Library/Library.vbproj -c Release --no-build -o artifacts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: artifacts/

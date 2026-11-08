@@ -1,11 +1,11 @@
 Imports System.Net
 Imports System.Net.Http
 Imports System.Text.Json
-Imports Library.Errors
-Imports Library.Models
-Imports Library.Queries
-Imports Library.Resources
-Imports Library.Serialization
+Imports OJS3_5.Library.Errors
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Queries
+Imports OJS3_5.Library.Resources
+Imports OJS3_5.Library.Serialization
 
 <TestClass>
 Public Class Phase3ResourceTests

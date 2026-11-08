@@ -6,7 +6,7 @@
 dotnet add package Ojs.Api.Client --prerelease
 ```
 
-The package (`Ojs.Api.Client`) contains the `Library` assembly, whose types live in the `Library` namespace. It targets **.NET 10** and has no dependencies outside the .NET base library.
+The package (`Ojs.Api.Client`) contains `OJS3_5.Library.dll`, whose types live in the `OJS3_5.Library` namespace. It targets **.NET 10** and has no dependencies outside the .NET base library.
 
 ## Get an API token
 
@@ -125,8 +125,8 @@ The library targets .NET 10, so it needs a PowerShell that runs on .NET 10 (Powe
 Load the DLL from the package folder:
 
 ```powershell
-Add-Type -Path ./Library.dll
-$ojs = [Library.OjsClient]::new([Library.OjsClientOptions]@{
+Add-Type -Path ./OJS3_5.Library.dll
+$ojs = [OJS3_5.Library.OjsClient]::new([OJS3_5.Library.OjsClientOptions]@{
     BaseUrl = 'https://journals.example.com'; JournalPath = 'jpk'; ApiToken = $env:OJS_TOKEN })
 $issue = $ojs.Issues.GetCurrentAsync().GetAwaiter().GetResult()
 $issue.Identification

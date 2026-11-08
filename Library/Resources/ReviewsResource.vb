@@ -2,8 +2,8 @@ Imports System.Net.Http
 Imports System.Text.Json
 Imports System.Text.Json.Serialization
 Imports System.Threading
-Imports Library.Http
-Imports Library.Models
+Imports OJS3_5.Library.Http
+Imports OJS3_5.Library.Models
 
 Namespace Resources
 

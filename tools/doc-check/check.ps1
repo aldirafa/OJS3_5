@@ -15,7 +15,7 @@
 #>
 $ErrorActionPreference = 'Stop'
 $here = $PSScriptRoot
-$repo = (Resolve-Path (Join-Path $here '..\..')).Path
+$repo = (Resolve-Path (Join-Path $here '../..')).Path
 $python = if (Get-Command python3 -ErrorAction SilentlyContinue) { 'python3' } else { 'python' }
 
 & $python -I (Join-Path $here 'extract_xmldoc.py') (Join-Path $repo 'Library') (Join-Path $here 'xmldoc/Snippets.vb')

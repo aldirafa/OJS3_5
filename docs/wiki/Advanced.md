@@ -68,7 +68,7 @@ Extension methods add helpers to models and resources:
 
 ```vb nocheck
 Imports System.Runtime.CompilerServices
-Imports Library.Models
+Imports OJS3_5.Library.Models
 
 Public Module SubmissionExtensions
     <Extension>

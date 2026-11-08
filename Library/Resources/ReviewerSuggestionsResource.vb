@@ -1,8 +1,8 @@
 Imports System.Text.Json
 Imports System.Threading
-Imports Library.Http
-Imports Library.Models
-Imports Library.Paging
+Imports OJS3_5.Library.Http
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Paging
 
 Namespace Resources
 

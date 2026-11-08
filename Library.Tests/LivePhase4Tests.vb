@@ -1,9 +1,9 @@
 Imports System.Net
 Imports System.Text
 Imports System.Text.Json
-Imports Library.Errors
-Imports Library.Models
-Imports Library.Queries
+Imports OJS3_5.Library.Errors
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Queries
 
 ''' <summary>
 ''' Live tests for DOIs, reviews, invitations and statistics. Read tests run with the "Live" settings; tests that

@@ -1,7 +1,7 @@
 Imports System.Text.Json
-Imports Library.Models
-Imports Library.Queries
-Imports Library.Resources
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Queries
+Imports OJS3_5.Library.Resources
 
 ''' <summary>
 ''' Read-only smoke tests against a real OJS 3.5 journal. They only issue GET requests.

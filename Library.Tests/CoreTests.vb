@@ -1,10 +1,10 @@
 Imports System.Net
 Imports System.Net.Http
 Imports System.Text.Json
-Imports Library.Errors
-Imports Library.Http
-Imports Library.Paging
-Imports Library.Serialization
+Imports OJS3_5.Library.Errors
+Imports OJS3_5.Library.Http
+Imports OJS3_5.Library.Paging
+Imports OJS3_5.Library.Serialization
 
 <TestClass>
 Public Class OptionsTests

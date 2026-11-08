@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>Library</RootNamespace>
+    <RootNamespace>OJS3_5.Library</RootNamespace>
+    <AssemblyName>OJS3_5.Library</AssemblyName>
     <TargetFramework>net10.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <OptionExplicit>On</OptionExplicit>
@@ -22,6 +23,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright (c) 2026 Aldi</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/aldirafa/OJS3_5</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/aldirafa/OJS3_5.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>

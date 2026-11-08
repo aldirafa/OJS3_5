@@ -1,9 +1,9 @@
 Imports System.Collections.Concurrent
 Imports System.Threading
-Imports Library.Http
-Imports Library.Models
-Imports Library.Paging
-Imports Library.Queries
+Imports OJS3_5.Library.Http
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Paging
+Imports OJS3_5.Library.Queries
 
 Namespace Resources
 

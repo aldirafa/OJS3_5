@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <RootNamespace>Library.Tests</RootNamespace>
+    <RootNamespace>OJS3_5.Library.Tests</RootNamespace>
     <LangVersion>latest</LangVersion>
     <OptionStrict>On</OptionStrict>
     <OptionInfer>On</OptionInfer>

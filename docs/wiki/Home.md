@@ -13,9 +13,9 @@ It also smooths over the quirks of the PHP backend, for example dates such as `"
 strings, and `[]` sent for an empty object.
 
 ```vb
-Imports Library
-Imports Library.Models
-Imports Library.Queries
+Imports OJS3_5.Library
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Queries
 
 Using ojs As New OjsClient(New OjsClientOptions With {
     .BaseUrl = "https://journals.example.com",
@@ -30,9 +30,9 @@ End Using
 ```
 
 ```csharp
-using Library;
-using Library.Models;
-using Library.Queries;
+using OJS3_5.Library;
+using OJS3_5.Library.Models;
+using OJS3_5.Library.Queries;
 
 using var ojs = new OjsClient(new OjsClientOptions
 {
@@ -90,9 +90,9 @@ for s in page.Items do
 * C# examples assume the SDK's implicit usings, which provide `System`, `System.IO`, `System.Linq`, `System.Net.Http` and others.
 * Numbers such as `12` (a submission ID) or `15` (a publication ID) stand in for IDs from your own journal.
 * Add these namespace imports to your files:
-  * `Library` (`OjsClient`, `OjsClientOptions`)
-  * `Library.Models`
-  * `Library.Queries`
-  * `Library.Serialization` (`LocalizedString`, `LocalizedVocab`)
-  * `Library.Errors`
-  * `Library.Resources` (`VocabNames`)
+  * `OJS3_5.Library` (`OjsClient`, `OjsClientOptions`)
+  * `OJS3_5.Library.Models`
+  * `OJS3_5.Library.Queries`
+  * `OJS3_5.Library.Serialization` (`LocalizedString`, `LocalizedVocab`)
+  * `OJS3_5.Library.Errors`
+  * `OJS3_5.Library.Resources` (`VocabNames`)

@@ -1,8 +1,8 @@
 Imports System.Net.Http
 Imports System.Text.Json.Nodes
-Imports Library.Models
-Imports Library.Queries
-Imports Library.Serialization
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Queries
+Imports OJS3_5.Library.Serialization
 
 <TestClass>
 Public Class Phase2ResourceTests

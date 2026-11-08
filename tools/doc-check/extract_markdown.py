@@ -40,8 +40,8 @@ def free_decls(text, idx):
     return [d[idx] for n, d in FREE.items() if n in used and n not in declared]
 
 # VB
-vb = ["Option Strict On", "Option Infer On", "Imports System.IO", "Imports Library", "Imports Library.Models", "Imports Library.Queries",
-      "Imports Library.Resources", "Imports Library.Serialization", "Imports Library.Errors", "", "Public Module WikiSnippets"]
+vb = ["Option Strict On", "Option Infer On", "Imports System.IO", "Imports OJS3_5.Library", "Imports OJS3_5.Library.Models", "Imports OJS3_5.Library.Queries",
+      "Imports OJS3_5.Library.Resources", "Imports OJS3_5.Library.Serialization", "Imports OJS3_5.Library.Errors", "", "Public Module WikiSnippets"]
 for n, (loc, body) in enumerate(blocks["vb"]):
     body = [b for b in body if not b.startswith("Imports ")]
     text = "\n".join(body)
@@ -53,7 +53,7 @@ open(os.path.join(out, "vb", "WikiSnippets.vb"), "w", encoding="utf-8").write("\
 
 # C#
 cs = ["using System; using System.IO; using System.Linq; using System.Collections.Generic; using System.Net.Http; using System.Threading; using System.Threading.Tasks;",
-      "using Library; using Library.Models; using Library.Queries; using Library.Resources; using Library.Serialization; using Library.Errors;",
+      "using OJS3_5.Library; using OJS3_5.Library.Models; using OJS3_5.Library.Queries; using OJS3_5.Library.Resources; using OJS3_5.Library.Serialization; using OJS3_5.Library.Errors;",
       "#pragma warning disable CS1998, CS0168, CS0219, CS8321", "public static class WikiSnippets {"]
 for n, (loc, body) in enumerate(blocks["csharp"]):
     body = [b for b in body if not re.match(r"^using [\w.]+;\s*$", b)]
@@ -65,8 +65,8 @@ cs.append("}")
 open(os.path.join(out, "cs", "WikiSnippets.cs"), "w", encoding="utf-8").write("\n".join(cs))
 
 # F#
-fs = ["module WikiSnippets", "#nowarn \"20\"", "open System", "open System.IO", "open Library", "open Library.Models",
-      "open Library.Queries", "open Library.Resources", "open Library.Serialization", "open Library.Errors", ""]
+fs = ["module WikiSnippets", "#nowarn \"20\"", "open System", "open System.IO", "open OJS3_5.Library", "open OJS3_5.Library.Models",
+      "open OJS3_5.Library.Queries", "open OJS3_5.Library.Resources", "open OJS3_5.Library.Serialization", "open OJS3_5.Library.Errors", ""]
 for n, (loc, body) in enumerate(blocks["fsharp"]):
     body = [b for b in body if not b.startswith("open ")]
     text = "\n".join(body)

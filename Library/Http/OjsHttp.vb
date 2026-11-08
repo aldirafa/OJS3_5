@@ -6,8 +6,8 @@ Imports System.Text
 Imports System.Text.Json
 Imports System.Text.Json.Nodes
 Imports System.Threading
-Imports Library.Errors
-Imports Library.Serialization
+Imports OJS3_5.Library.Errors
+Imports OJS3_5.Library.Serialization
 
 Namespace Http
 

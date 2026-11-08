@@ -1,9 +1,9 @@
 Imports System.IO
-Imports Library
-Imports Library.Errors
-Imports Library.Models
-Imports Library.Queries
-Imports Library.Serialization
+Imports OJS3_5.Library
+Imports OJS3_5.Library.Errors
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Queries
+Imports OJS3_5.Library.Serialization
 
 ''' <summary>
 ''' A small command-line tool showing common tasks with the OJS client.

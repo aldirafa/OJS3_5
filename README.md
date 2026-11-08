@@ -12,7 +12,7 @@ VB.NET and works from any .NET language: VB.NET, C#, F#, PowerShell and others.
   Edit models send only the fields you set.
 * **Tested against real servers.** The PHP backend's quirks are handled for you: string numbers, `"Y-m-d H:i:s"`
   dates, `[]` for empty objects, responses that differ from the OpenAPI document, and more. See
-  [OJS 3.5 Quirks](docs/wiki/OJS-3.5-Quirks.md).
+  [OJS 3.5 Quirks](https://github.com/aldirafa/OJS3_5/wiki/OJS-3.5-Quirks).
 * **Convenient.** Automatic paging, `IAsyncEnumerable` streaming, typed exceptions with validation messages, file
   uploads and downloads, and CSV statistics.
 * **No dependencies.** It needs only `System.Net.Http` and `System.Text.Json` from .NET 10.
@@ -23,7 +23,7 @@ VB.NET and works from any .NET language: VB.NET, C#, F#, PowerShell and others.
 dotnet add package Ojs.Api.Client --prerelease
 ```
 
-The package contains the `Library` assembly; the types are in the `Library` namespace (`Library.OjsClient`, `Library.Models`, ...).
+The package contains `OJS3_5.Library.dll`; all types are in the `OJS3_5.Library` namespace (`OJS3_5.Library.OjsClient`, `OJS3_5.Library.Models`, ...).
 
 ## Quick start
 
@@ -33,9 +33,9 @@ You need an API token: in OJS, open **User Profile > API Key**. The server must 
 **VB.NET**
 
 ```vb
-Imports Library
-Imports Library.Models
-Imports Library.Queries
+Imports OJS3_5.Library
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Queries
 
 Using ojs As New OjsClient(New OjsClientOptions With {
     .BaseUrl = "https://journals.example.com",
@@ -53,7 +53,7 @@ End Using
 **C#**
 
 ```csharp
-using Library;
+using OJS3_5.Library;
 
 using var ojs = new OjsClient(new OjsClientOptions
 {
@@ -71,7 +71,7 @@ foreach (var article in current.Articles)
 **F#**
 
 ```fsharp
-open Library
+open OJS3_5.Library
 
 task {
     use ojs =
@@ -190,9 +190,9 @@ Dim csv = Await ojs.Stats.Publications.ListCountriesCsvAsync()
 
 ## Documentation
 
-* **Wiki** (in [`docs/wiki`](docs/wiki/Home.md)): one page per area, with examples in VB.NET, C# and F#.
+* **[Wiki](https://github.com/aldirafa/OJS3_5/wiki/Home):** one page per area, with examples in VB.NET, C# and F#.
 * **XML documentation:** every public member has a summary and an example, shown in IntelliSense.
-* **Sample app:** [`Samples/Library.Sample`](Samples/Library.Sample/Program.vb) is a small command-line tool:
+* **Sample app:** [`Samples/Library.Sample`](https://github.com/aldirafa/OJS3_5/blob/HEAD/Samples/Library.Sample/Program.vb) is a small command-line tool:
 
   ```
   set OJS_BASE_URL=https://journals.example.com
@@ -212,7 +212,7 @@ dotnet test OJS3_5.slnx
 
 The unit tests need no server. The live tests run against a real journal when you set the `OJS_*` environment
 variables, and the tests that change data also need `OJS_ALLOW_WRITES=1`. Run those against a test journal only. See
-[Testing and Contributing](docs/wiki/Testing-and-Contributing.md).
+[Testing and Contributing](https://github.com/aldirafa/OJS3_5/wiki/Testing-and-Contributing).
 
 `tools/doc-check` compiles every code example in the XML documentation and the wiki, in VB.NET, C# and F#.
 
@@ -223,4 +223,4 @@ variables, and the tests that change data also need `OJS_ALLOW_WRITES=1`. Run th
 
 ## License
 
-[MIT](LICENSE.txt)
+[MIT](https://github.com/aldirafa/OJS3_5/blob/HEAD/LICENSE.txt)

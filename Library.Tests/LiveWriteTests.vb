@@ -1,7 +1,7 @@
-Imports Library.Errors
-Imports Library.Models
-Imports Library.Queries
-Imports Library.Serialization
+Imports OJS3_5.Library.Errors
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Queries
+Imports OJS3_5.Library.Serialization
 
 ''' <summary>
 ''' Write tests against a DUMMY OJS 3.5 journal. Each test creates its own data and removes it again.

@@ -28,9 +28,9 @@ for dp, _, files in os.walk(root):
                 snips.append((f"{f}:{start + 1}", [html.unescape(b) for b in body]))
             i += 1
 
-out = ["Option Strict On", "Option Infer On", "Imports System.IO", "Imports System.Net.Http", "Imports Library",
-       "Imports Library.Models", "Imports Library.Queries", "Imports Library.Resources", "Imports Library.Serialization",
-       "Imports Library.Errors", "Imports Library.Http", "Imports Library.Paging", "", "Public Module Snippets", ""]
+out = ["Option Strict On", "Option Infer On", "Imports System.IO", "Imports System.Net.Http", "Imports OJS3_5.Library",
+       "Imports OJS3_5.Library.Models", "Imports OJS3_5.Library.Queries", "Imports OJS3_5.Library.Resources", "Imports OJS3_5.Library.Serialization",
+       "Imports OJS3_5.Library.Errors", "Imports OJS3_5.Library.Http", "Imports OJS3_5.Library.Paging", "", "Public Module Snippets", ""]
 for n, (loc, body) in enumerate(snips):
     text = "\n".join(body)
     declared = set(re.findall(r"\b(?:Dim|Using|For Each)\s+(\w+)", text))

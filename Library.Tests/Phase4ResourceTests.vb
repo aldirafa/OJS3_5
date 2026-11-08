@@ -1,8 +1,8 @@
 Imports System.Net.Http
 Imports System.Text
-Imports Library.Models
-Imports Library.Queries
-Imports Library.Resources
+Imports OJS3_5.Library.Models
+Imports OJS3_5.Library.Queries
+Imports OJS3_5.Library.Resources
 
 <TestClass>
 Public Class Phase4ResourceTests

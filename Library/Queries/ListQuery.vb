@@ -1,4 +1,4 @@
-Imports Library.Http
+Imports OJS3_5.Library.Http
 
 Namespace Queries
 

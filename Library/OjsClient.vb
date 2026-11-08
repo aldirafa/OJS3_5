@@ -1,8 +1,8 @@
 Imports System.Net.Http
 Imports System.Text.Json
 Imports System.Threading
-Imports Library.Http
-Imports Library.Resources
+Imports OJS3_5.Library.Http
+Imports OJS3_5.Library.Resources
 
 ''' <summary>akun
 ''' Entry point for the OJS 3.5 REST API. Each property groups the endpoints of one API area.

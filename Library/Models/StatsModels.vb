@@ -1,7 +1,7 @@
 Imports System.Globalization
 Imports System.Text.Json
 Imports System.Text.Json.Serialization
-Imports Library.Serialization
+Imports OJS3_5.Library.Serialization
 
 Namespace Models
 
